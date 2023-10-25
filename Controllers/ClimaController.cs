@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using rose_api.ExternalServices.Services;
 using rose_api.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace rose_api.Controllers
 {
@@ -86,7 +87,13 @@ namespace rose_api.Controllers
 
             try
             {
-                Cidade? brasil_cidade = await _brasilApi.GetCidadePorNome(cidade);
+                string cidadeCodificada = cidade;
+                if (cidade.Any(ch => WebUtility.UrlEncode(ch.ToString()) != ch.ToString()))
+                {
+                    cidadeCodificada = WebUtility.UrlEncode(cidade);
+                }
+
+                Cidade? brasil_cidade = await _brasilApi.GetCidadePorNome(cidadeCodificada);
 
                 if (brasil_cidade != null)
                 {
