@@ -10,6 +10,26 @@ GO
 USE rose;
 GO
 
+CREATE TABLE log_requisition (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+    endPoint NVARCHAR(MAX),
+    parameters NVARCHAR(MAX),
+    data NVARCHAR(MAX),
+    ip NVARCHAR(255),
+    createdDate DATETIME
+);
+GO
+
+CREATE TABLE log_error (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+    endPoint NVARCHAR(MAX),
+    parameters NVARCHAR(MAX),
+    error NVARCHAR(MAX),
+    ip NVARCHAR(255),
+    createdDate DATETIME
+);
+GO
+
 CREATE LOGIN rose WITH PASSWORD = 'password123!@#Rose';
 GO
 
