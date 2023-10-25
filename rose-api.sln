@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rose-api", "rose-api.csproj", "{223EBCA1-ED2C-4C11-8DD2-E8F7AD62CB20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{223EBCA1-ED2C-4C11-8DD2-E8F7AD62CB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{223EBCA1-ED2C-4C11-8DD2-E8F7AD62CB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{223EBCA1-ED2C-4C11-8DD2-E8F7AD62CB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{223EBCA1-ED2C-4C11-8DD2-E8F7AD62CB20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48F74FF1-B45A-407A-9F8C-A09BD2F05B2F}
+	EndGlobalSection
+EndGlobal
