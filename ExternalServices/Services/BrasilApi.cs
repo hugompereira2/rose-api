@@ -52,14 +52,7 @@ namespace rose_api.ExternalServices.Services
 
                     var cidades = JsonConvert.DeserializeObject<List<Cidade>>(json);
 
-                    if (cidades?.Count == 1)
-                    {
-                        return cidades[0];
-                    }
-                    else if (cidades?.Count > 1)
-                    {
-                        throw new InvalidOperationException("Mais de uma cidade encontrada.");
-                    }
+                    return cidades?[0];
                 }
 
                 var errorMessage = $"Requisição HTTP falhou, código: {response.StatusCode}";
