@@ -1,7 +1,9 @@
+using Microsoft.OpenApi.Models;
+using rose_api.ExternalServices.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 var configuration = new ConfigurationBuilder()
@@ -9,29 +11,31 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Read the connection string from appsettings.json
 string connectionString = configuration.GetConnectionString("SqlConnection") ?? "DefaultConnectionStringFallback";
 
-// Register DapperRepository with the connection string
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations();
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rose API", Version = "v1" });
+});
+
 builder.Services.AddScoped(provider => new DapperRepository(connectionString));
+builder.Services.AddScoped<BrasilApi>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rose API");
+    });
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
