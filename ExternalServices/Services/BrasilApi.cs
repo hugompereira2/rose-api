@@ -34,7 +34,6 @@ namespace rose_api.ExternalServices.Services
             }
             catch (Exception ex)
             {
-                // Handle exceptions and log them
                 LogError("GetClimaPorCodigoCidade", ex.Message);
                 return "";
             }

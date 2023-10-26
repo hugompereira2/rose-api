@@ -9,7 +9,7 @@ namespace rose_api.Models
         [SwaggerSchema("id da cidade.")]
         public int Id { get; set; }
         [SwaggerSchema("Nome da cidade.")]
-        public string CidadeNome { get; set; }
+        public string Nome { get; set; }
 
         [JsonProperty("estado")]
         [SwaggerSchema("Estado da cidade.")]
@@ -21,7 +21,7 @@ namespace rose_api.Models
 
         [JsonProperty("clima")]
         [SwaggerSchema("Informações climáticas da cidade.")]
-        public List<ClimaCidade> Clima { get; set; }
+        public List<ClimaCidade?> Clima { get; set; }
     }
 
     public class ClimaCidade
