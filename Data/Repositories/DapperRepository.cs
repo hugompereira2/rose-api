@@ -18,11 +18,7 @@ public class DapperRepository
             try
             {
                 connection.Open();
-                var logRequisitions = connection.Query<LogError>("SELECT * from log_error");
-                foreach (var logRequisition in logRequisitions)
-                {
-                    Console.WriteLine($"ID: {logRequisition.Id}, EndPoint: {logRequisition.EndPoint}, ...");
-                }
+                var logRequisitions = connection.Query<LogRequisition>("SELECT * from log_requisition");
                 return true;
             }
             catch (Exception)
