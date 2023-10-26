@@ -101,7 +101,7 @@ namespace rose_api.Controllers
 
                     if (clima != null)
                     {
-                        LogRequisition logRequisition = CreateLogRequisition(cidade, clima, clientIp);
+                        LogRequisition logRequisition = CreateLogRequisition(cidade, JsonConvert.SerializeObject(clima), clientIp);
                         _dapperRepository.InsertLogRequisition(logRequisition);
                         return Ok(clima);
                     }
@@ -141,11 +141,11 @@ namespace rose_api.Controllers
 
             try
             {
-                var clima = await _brasilApi.GetClimaPorCodigoCidade(codigoCidade);
+                ClimaCidade? clima = await _brasilApi.GetClimaPorCodigoCidade(codigoCidade);
 
-                if (!string.IsNullOrEmpty(clima))
+                if (clima != null)
                 {
-                    LogRequisition logRequisition = CreateLogRequisition(codigoCidade.ToString(), clima, clientIp);
+                    LogRequisition logRequisition = CreateLogRequisition(codigoCidade.ToString(), JsonConvert.SerializeObject(clima), clientIp);
                     _dapperRepository.InsertLogRequisition(logRequisition);
                     return Ok(clima);
                 }

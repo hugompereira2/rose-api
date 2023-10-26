@@ -17,7 +17,7 @@ namespace rose_api.ExternalServices.Services
             _logger = logger;
         }
 
-        public async Task<string> GetClimaPorCodigoCidade(int codigo_cidade)
+        public async Task<ClimaCidade?> GetClimaPorCodigoCidade(int codigo_cidade)
         {
             try
             {
@@ -25,18 +25,21 @@ namespace rose_api.ExternalServices.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsStringAsync();
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    var clima = JsonConvert.DeserializeObject<ClimaCidade>(json);
+
+                    return clima;
                 }
 
                 var errorMessage = $"Requisição HTTP falhou, código: {response.StatusCode}";
                 LogError("GetClimaPorCodigoCidade", errorMessage);
-                return "";
+                return null;
             }
             catch (Exception ex)
             {
-                // Handle exceptions and log them
                 LogError("GetClimaPorCodigoCidade", ex.Message);
-                return "";
+                return null;
             }
         }
 
