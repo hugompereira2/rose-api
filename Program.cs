@@ -1,5 +1,8 @@
 using Microsoft.OpenApi.Models;
 using rose_api.ExternalServices.Services;
+using DotNetEnv;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +12,16 @@ builder.Services.AddControllers();
 var configuration = new ConfigurationBuilder()
     .SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
     .Build();
 
-string connectionString = configuration.GetConnectionString("SqlConnection") ?? "DefaultConnectionStringFallback";
+string server = Environment.GetEnvironmentVariable("SERVER");
+string port = Environment.GetEnvironmentVariable("PORT");
+string database = Environment.GetEnvironmentVariable("DATABASE");
+string saUser = Environment.GetEnvironmentVariable("SA_USER");
+string saPassword = Environment.GetEnvironmentVariable("SA_PASSWORD");
+
+string connectionString = $"Server={server},{port};Database={database};User Id={saUser};Password={saPassword};TrustServerCertificate=True";
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
